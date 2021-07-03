@@ -53,43 +53,26 @@ async function scrapeProduct(url) {
         const [click1] = await page.$x(`//*[@id="a-autoid-${String(pic)}"]/span/input`);
         await click1.click();
                 
-        const [img2] = await page.$x('//*[@id="main-image-container"]/ul');
+        const [img2] = await page.$x('//*[@id="main-image-container"]');
         //const srcImg2 = await img2.getProperty('src');
         //nextImage = await srcImg2.jsonValue();
+        //otherImgs.push(nextImage);
+
         const data = await img2.evaluate( () => {
             const images = document.querySelector('#main-image-container');
             const imagesImages = images.querySelectorAll('img');
             const urls = Array.from(imagesImages).map(v => v.src);
             return urls;
-        });
 
-        otherImgs.push(data[0]);
-    };
+            return url;
+        });
+        otherImgs = data;
+
+    };  
  
 
     console.log({title, description, bulletPoint1, bulletPoint2, bulletPoint3, bulletPoint4, bulletPoint5, img1URL, otherImgs});
-//*[@id="main-image-container"]/ul/li[5]/span/span/div/img
-//*[@id="main-image-container"]/ul/li[5]/span/span/div/img
-//*[@id="main-image-container"]/ul/li[5]/span/span/div
-//*[@id="a-autoid-8"]/span/input
-//*[@id="main-image-container"]/ul/li[5]/span/span/div/img
-//*[@id="main-image-container"]
-//*[@id="a-autoid-8"]/span/input
-//*[@id="a-autoid-8"]/span/input
-//*[@id="main-image-container"]/ul/li[5]/span/span/div/img
-//*[@id="a-autoid-8"]/span/input
-//*[@id="a-autoid-9"]/span/input
-//*[@id="a-autoid-8"]/span/input
-//*[@id="a-autoid-8"]/span/input
-//*[@id="main-image-container"]/ul/li[5]/span/span/div/img
-// /html/body/div[2]/div[3]/div[8]/div[4]/div[3]/div[1]/div[1]/div/div/div[1]/ul/li[9]/span/span/span/input
-// /html/body/div[2]/div[3]/div[8]/div[4]/div[3]/div[1]/div[1]/div/div/div[2]/div[1]/div[1]/ul/li[5]/span/span/div/img
-//*[@id="main-image-container"]/ul/li[5]/span/span/div/img
-//*[@id="a-autoid-5"]/span/input
-//*[@id="a-autoid-4"]/span/input
-//*[@id="a-autoid-5"]/span/input
-//*[@id="a-autoid-5-announce"]
-//*[@id="a-autoid-4"]/span/input
+
 //*[@id="a-autoid-5"]/span/input
 //*[@id="a-autoid-5"]/span/input
 //*[@id="main-image-container"]/ul/li[9]/span/span/div/img
@@ -99,6 +82,11 @@ async function scrapeProduct(url) {
 //#main-image-container > ul > li.image.item.itemNo2.maintain-height.selected > span > span > div > img
 //*[@id="main-image-container"]/ul/li[5]/span/span/div/img
 //*[@id="main-image-container"]/ul/li[7]/span/span/div/img
+//*[@id="landingImage"]
+//*[@id="main-image-container"]/ul/li[7]/span/span/div/img
+//*[@id="main-image-container"]/ul/li[8]
+//*[@id="main-image-container"]/ul
+/html/body/div[1]/div[3]/div[9]/div[4]/div[3]/div[1]/div[1]/div/div/div/div[1]/div[1]/ul/li[5]/span/span/div/img
 
     browser.close();
 };
